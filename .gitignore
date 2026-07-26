@@ -1,0 +1,5 @@
+# Machine-specific environment dump, regenerated with `SPC f e e'.
+.spacemacs.env
+
+# Byte-compiled layer files.
+*.elc
