@@ -50,7 +50,11 @@ This function should only modify configuration layer settings."
      helm
      (lsp :variables
           lsp-format-buffer-on-save t
-          lsp-format-buffer-on-save-list '(c-mode c++-mode))
+          lsp-format-buffer-on-save-list '(c-mode c++-mode)
+          ;; clangd advertises on-type formatting triggered by newline, and its
+          ;; reply rewrites the whitespace-only line, dropping point to column 0
+          ;; right after cc-mode indented it. Format on save/demand still works.
+          lsp-enable-on-type-formatting nil)
      ;; markdown
      multiple-cursors
      ;; org
@@ -576,7 +580,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq catppuccin-flavor 'frappe))
+  (setq catppuccin-flavor 'mocha))
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
