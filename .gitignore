@@ -3,3 +3,6 @@
 
 # Byte-compiled layer files.
 *.elc
+
+# Emacs auto-save bookkeeping.
+auto-save-list/

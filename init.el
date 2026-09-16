@@ -32,7 +32,9 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(toml
+   '(rust
+     typst
+     toml
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -572,7 +574,7 @@ This function defines the environment variables for your Emacs session. By
 default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
-  (spacemacs/load-spacemacs-env)
+  (spacemacs/load-spacemacs-env t)
   )
 
 (defun dotspacemacs/user-init ()
@@ -608,7 +610,11 @@ before packages are loaded."
                           (awk-mode . "awk")
                           (c-mode . "clang-format-llvm")
                           (c++-mode . "clang-format-llvm")
-                          (other . "gnu"))))
+                          (other . "gnu")))
+  (setq projectile-project-search-path '("~/Projects/" "~/School/" "/mnt/c/Users/raybb/Projects/" "/mnt/c/Users/raybb/School/"))
+  (setq projectile-enable-caching t)
+  (setq projectile-indexing-method 'alien)
+  (setq projectile-sort-order 'recentf))
 
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -637,7 +643,7 @@ This function is called at the very end of Spacemacs initialization."
                 evil-numbers evil-surround evil-textobj-line evil-tutor
                 evil-unimpaired evil-visual-mark-mode evil-visualstar
                 expand-region eyebrowse fancy-battery flycheck flycheck-elsa
-                flycheck-package flycheck-pos-tip gendoxy golden-ratio
+                flycheck-package flycheck-pos-tip gendoxy ggtags golden-ratio
                 google-c-style google-translate helm-ag helm-c-yasnippet
                 helm-comint helm-company helm-descbinds helm-lsp helm-make
                 helm-mode-manager helm-org helm-projectile helm-purpose helm-swoop
@@ -648,13 +654,14 @@ This function is called at the very end of Spacemacs initialization."
                 multi-line nameless open-junk-file org org-superstar origami
                 overseer package-lint page-break-lines paradox password-generator
                 pcre2el popwin pos-tip quickrun rainbow-delimiters restart-emacs
-                space-doc spaceline spacemacs-purpose-popwin
-                spacemacs-whitespace-cleanup string-edit-at-point
-                string-inflection symbol-overlay symon term-cursor toc-org
-                transient treemacs-evil treemacs-icons-dired treemacs-persp
-                treemacs-projectile undo-fu-session uuidgen vi-tilde-fringe
-                volatile-highlights vundo wgrep winum writeroom-mode ws-butler
-                yaml yasnippet yasnippet-snippets)))
+                ron-mode rust-mode rustic space-doc spaceline
+                spacemacs-purpose-popwin spacemacs-whitespace-cleanup
+                string-edit-at-point string-inflection symbol-overlay symon
+                term-cursor toc-org transient treemacs-evil treemacs-icons-dired
+                treemacs-persp treemacs-projectile typst-ts-mode undo-fu-session
+                uuidgen vi-tilde-fringe volatile-highlights vundo wgrep winum
+                writeroom-mode ws-butler xterm-color yaml yasnippet
+                yasnippet-snippets)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
