@@ -11,6 +11,7 @@
     :defer t
     :init
     (add-hook 'typst-ts-mode-hook #'spacemacs//typst-setup-backend)
+    (add-hook 'typst-ts-mode-hook #'spacemacs//typst-setup-editing)
     :config
     (spacemacs//typst-ensure-grammar)
     (setq typst-ts-watch-options typst-watch-options)

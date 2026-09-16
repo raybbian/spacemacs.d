@@ -13,4 +13,9 @@
              (configuration-layer/layer-used-p 'lsp))
     (lsp-deferred)))
 
+;; typst-ts-mode adds {}()[]$&. to `electric-indent-chars', reindenting the
+;; current line on every one of those keystrokes while it is still half-typed.
+(defun spacemacs//typst-setup-editing ()
+  (setq-local electric-indent-inhibit t))
+
 ;;; funcs.el ends here
