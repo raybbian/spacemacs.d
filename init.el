@@ -222,7 +222,8 @@ It should only modify the values of Spacemacs settings."
    ;; package can be defined with `:package', or a theme can be defined with
    ;; `:location' to download the theme package, refer the themes section in
    ;; DOCUMENTATION.org for the full theme specifications.
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '((catppuccin :package catppuccin-theme)
+                         spacemacs-dark
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -583,7 +584,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  )
+  (setq catppuccin-flavor 'mocha))
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
@@ -614,7 +615,11 @@ before packages are loaded."
   (setq projectile-project-search-path '("~/Projects/" "~/School/" "/mnt/c/Users/raybb/Projects/" "/mnt/c/Users/raybb/School/"))
   (setq projectile-enable-caching t)
   (setq projectile-indexing-method 'alien)
-  (setq projectile-sort-order 'recentf))
+  (setq projectile-sort-order 'recentf)
+
+  ;; persp-mode keeps closed frames in its lighter-update queue under the daemon
+  (advice-add 'set-frame-parameter :before-while
+              (lambda (f &rest _) (or (null f) (frame-live-p f)))))
 
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -629,19 +634,21 @@ This function is called at the very end of Spacemacs initialization."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
+   '(custom-safe-themes
+     '("c4df9006b9eb32599d758800a32f3487c2cdf13826084511783b47d419024af2" default))
    '(package-selected-packages
      '(ace-link aggressive-indent all-the-icons auto-compile auto-highlight-symbol
-                auto-yasnippet avy-jump-helm-line bui centered-cursor-mode
-                clean-aindent-mode column-enforce-mode company company-c-headers
-                cpp-auto-include dap-mode define-word devdocs diminish
-                dired-quick-sort disable-mouse disaster dotenv-mode drag-stuff
-                dumb-jump elisp-def elisp-demos elisp-slime-nav emr eval-sexp-fu
-                evil-anzu evil-args evil-cleverparens evil-collection
-                evil-easymotion evil-escape evil-evilified-state evil-exchange
-                evil-goggles evil-iedit-state evil-indent-plus evil-lion
-                evil-lisp-state evil-matchit evil-mc evil-nerd-commenter
-                evil-numbers evil-surround evil-textobj-line evil-tutor
-                evil-unimpaired evil-visual-mark-mode evil-visualstar
+                auto-yasnippet avy-jump-helm-line bui catppuccin-theme
+                centered-cursor-mode clean-aindent-mode column-enforce-mode
+                company company-c-headers cpp-auto-include dap-mode define-word
+                devdocs diminish dired-quick-sort disable-mouse disaster
+                dotenv-mode drag-stuff dumb-jump elisp-def elisp-demos
+                elisp-slime-nav emr eval-sexp-fu evil-anzu evil-args
+                evil-cleverparens evil-collection evil-easymotion evil-escape
+                evil-evilified-state evil-exchange evil-goggles evil-iedit-state
+                evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-mc
+                evil-nerd-commenter evil-numbers evil-surround evil-textobj-line
+                evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar
                 expand-region eyebrowse fancy-battery flycheck flycheck-elsa
                 flycheck-package flycheck-pos-tip gendoxy ggtags golden-ratio
                 google-c-style google-translate helm-ag helm-c-yasnippet
@@ -658,8 +665,8 @@ This function is called at the very end of Spacemacs initialization."
                 spacemacs-purpose-popwin spacemacs-whitespace-cleanup
                 string-edit-at-point string-inflection symbol-overlay symon
                 term-cursor toc-org transient treemacs-evil treemacs-icons-dired
-                treemacs-persp treemacs-projectile typst-ts-mode undo-fu-session
-                uuidgen vi-tilde-fringe volatile-highlights vundo wgrep winum
+                treemacs-persp treemacs-projectile undo-fu-session uuidgen
+                vi-tilde-fringe volatile-highlights vundo wgrep winum
                 writeroom-mode ws-butler xterm-color yaml yasnippet
                 yasnippet-snippets)))
   (custom-set-faces
